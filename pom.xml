@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.novax.cex</groupId>
+    <artifactId>novax-cex</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>NovaX CEX</name>
+    <description>Multi-module Java scaffold for a centralized exchange platform.</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <spring.boot.version>3.3.2</spring.boot.version>
+            <mybatis.plus.version>3.5.16</mybatis.plus.version>
+            <druid.version>1.2.28</druid.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>platform/common</module>
+        <module>platform/security</module>
+        <module>platform/event-schema</module>
+        <module>platform/persistence</module>
+        <module>platform/test-kit</module>
+        <module>services/gateway-service</module>
+        <module>services/user-service</module>
+        <module>services/account-service</module>
+        <module>services/order-service</module>
+        <module>services/matching-engine-service</module>
+        <module>services/clearing-service</module>
+        <module>services/market-service</module>
+        <module>services/websocket-service</module>
+        <module>services/wallet-service</module>
+        <module>services/risk-service</module>
+        <module>services/margin-service</module>
+        <module>services/futures-service</module>
+        <module>services/admin-service</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <release>${java.version}</release>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.2.5</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
