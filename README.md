@@ -403,6 +403,33 @@ WebSocket 推送服务。
 - `docs/modules.md`：模块清单和职责
 - `docs/events.md`：事件主题与事件模型说明
 - `docs/database.md`：数据库设计起点
+- `docs/changes/`：按微服务拆分的模块变更记录
+
+## 模块变更与 DDL 记录规范
+
+为了避免“代码改了，但没人知道改了什么、表怎么变的”的问题，当前仓库统一要求每个模块都保留两类记录：
+
+- 模块变更文档：`docs/changes/<service>/`
+- 数据库 DDL 记录：`sql/postgresql/<service>/changes/`
+
+执行规则：
+
+- 每次改动某个微服务，都要在 `docs/changes/<service>/` 新增一条 Markdown 记录。
+- 如果改动涉及表结构、索引、约束、字段类型、默认值等数据库变更，必须同步在 `sql/postgresql/<service>/changes/` 新增对应 SQL。
+- 如果本次没有 DDL，也要在变更文档里明确写出“本次无 DDL 变更”。
+- 一次需求如果同时改多个模块，要分别记录到各自模块目录，不要混写。
+
+推荐命名格式：
+
+```text
+docs/changes/<service>/YYYY-MM-DD-序号-变更主题.md
+sql/postgresql/<service>/changes/YYYY-MM-DD-序号-变更主题.sql
+```
+
+例如：
+
+- `docs/changes/order-service/2026-06-03-001-add-order-fee.md`
+- `sql/postgresql/order-service/changes/2026-06-03-001-add-order-fee.sql`
 
 ## 当前阶段说明
 
